@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Crapto Invoice Maker</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/invoice.css">
+  <style id="page-rule">@page { size: letter; margin: 0.45in 0; }</style>
+</head>
+<body>
+  <div class="app" id="app" data-view="edit">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark"><img src="assets/logo.png" alt=""></span>
+        <span class="brand-text">
+          <span class="brand-name">Invoice Maker</span>
+          <span class="brand-doc" id="brandDoc"></span>
+        </span>
+      </div>
+
+      <span class="save-state hide-narrow" id="saveState">Saved on this device</span>
+
+      <div class="bar-group">
+        <button class="icon-btn" id="undoBtn" type="button" title="Undo (Ctrl+Z)" aria-label="Undo"></button>
+        <button class="icon-btn" id="redoBtn" type="button" title="Redo (Ctrl+Shift+Z)" aria-label="Redo"></button>
+      </div>
+
+      <div class="bar-group">
+        <button class="btn" id="invoicesBtn" type="button"></button>
+        <div class="menu-wrap">
+          <button class="btn" id="newBtn" type="button" aria-haspopup="true" aria-expanded="false"></button>
+          <div class="menu" id="newMenu" hidden></div>
+        </div>
+        <button class="btn btn-primary" id="printBtn" type="button"></button>
+      </div>
+    </header>
+
+    <div class="view-switch">
+      <div class="seg" role="group" aria-label="View">
+        <button type="button" data-view="edit" aria-pressed="true">Edit</button>
+        <button type="button" data-view="preview" aria-pressed="false">Preview</button>
+      </div>
+    </div>
+
+    <main class="main">
+      <aside class="editor" id="editor" aria-label="Invoice editor"></aside>
+      <section class="preview" id="preview" aria-label="Invoice preview">
+        <div class="preview-bar"><span class="pages" id="pageCount"></span></div>
+        <div class="sheet-frame" id="sheetFrame">
+          <article class="sheet" id="sheet"></article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="drawer" id="drawer" hidden aria-label="Saved invoices">
+    <div class="drawer-head">
+      <h2>Your invoices</h2>
+      <button class="icon-btn" type="button" id="drawerClose" aria-label="Close"></button>
+    </div>
+    <div class="drawer-body">
+      <input class="drawer-search" id="drawerSearch" type="search" placeholder="Search by client, number or title" aria-label="Search invoices">
+      <div id="invoiceList"></div>
+      <hr style="border:0;border-top:1px solid var(--line);margin:12px 0 4px">
+      <div class="grid2">
+        <button class="btn btn-sm" type="button" id="backupBtn">Back up all (.json)</button>
+        <button class="btn btn-sm" type="button" id="restoreBtn">Restore / import</button>
+      </div>
+      <p class="field"><span class="hint">Invoices are saved automatically in this browser. Back up regularly or before clearing browser data.</span></p>
+    </div>
+  </aside>
+
+  <input type="file" id="importFile" accept="application/json,.json" hidden>
+  <input type="file" id="imageFile" accept="image/*" hidden>
+  <div class="toast" id="toast" role="status" hidden></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
